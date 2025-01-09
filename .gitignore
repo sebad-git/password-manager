@@ -1,0 +1,58 @@
+### Maven ###
+target/
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+release.properties
+maven-wrapper.properties
+MavenWrapperDownloader.java
+mvnw
+mvnw.cmd
+
+### IDEs ###
+.idea/*
+.idea_modules/*
+*/**/.idea/*
+*/**/.idea_modules/*
+**/.classpath
+**/.factorypath
+**/.vscode
+**/.project
+**/.settings/*
+
+### Files ###
+.DS_Store
+*.iws
+*.iml
+*.class
+*.jar
+*.war
+*.ear
+*.jks.
+*.keystore
+
+### Other ###
+hs_error_pid*.log
+scripts/bin/*
+scripts/cache
+scripts/cnf/dev.cnf
+scripts/jenkins/bes-bundle/cache
+scripts/kubernetes/bes.yml
+scripts/vagrant/cache
+**/node_modules/
+server/fmm.*.db
+.vagrant/
+client/.scannerwork
+client/debug.log
+client/src/store/store-flag.d.ts
+.secrets.yml
+uitests/results
+uitests/logs
+uitests/test-output
+*.nvmrc
+
+### BES Connector ###
+**/resources/apigee.properties
+
+### Misc. ###
+**/__LOCAL__*
