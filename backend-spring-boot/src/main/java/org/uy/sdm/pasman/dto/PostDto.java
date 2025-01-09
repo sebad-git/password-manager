@@ -1,4 +1,4 @@
-package org.uy.sdm.pasman.model.dto;
+package org.uy.sdm.pasman.dto;
 
 import java.time.LocalDateTime;
 

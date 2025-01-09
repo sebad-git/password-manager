@@ -1,0 +1,1 @@
+docker compose -p password-manager-contaner up -d

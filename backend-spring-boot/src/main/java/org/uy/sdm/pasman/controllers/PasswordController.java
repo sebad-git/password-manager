@@ -1,6 +1,6 @@
 package org.uy.sdm.pasman.controllers;
 
-import org.uy.sdm.pasman.model.dto.CommentDto;
+import org.uy.sdm.pasman.dto.CommentDto;
 import org.uy.sdm.pasman.services.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.uy.sdm.pasman.model.dto.PostDto;
+import org.uy.sdm.pasman.dto.PostDto;
 import org.uy.sdm.pasman.services.PostService;
 
 import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping(Endpoints.PASSWORD_CONTROLLER)
+public class PasswordController {
 
 	private final PostService postService;
 	private final CommentService commentService;
 
-	public PostController(
+	public PasswordController(
 		final PostService postService,
 		final CommentService commentService
 	) {
