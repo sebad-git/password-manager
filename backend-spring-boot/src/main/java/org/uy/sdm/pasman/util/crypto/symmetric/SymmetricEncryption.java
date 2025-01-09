@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SymmetricEncryption {
+public final class SymmetricEncryption {
 
     public static SymmetricEncryptor AES() {
         return new Aes();

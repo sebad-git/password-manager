@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.uy.sdm.pasman.model.SecurityUser;
 
 @Repository
-public interface UserRepo extends JpaRepository<SecurityUser,String> {
+public interface UserRepo extends JpaRepository<SecurityUser,Long> {
 
 	SecurityUser findByUsernameIgnoreCase(String username);
 }

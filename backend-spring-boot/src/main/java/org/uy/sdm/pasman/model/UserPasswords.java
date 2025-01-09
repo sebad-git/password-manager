@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,10 +26,11 @@ public class UserPasswords implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String userName;
+	private Long userId;
 	@Column(length = 4096)
 	private String userValue;
 	@Column(length = 4096)
 	private String passwordValue;
-
+	@Version
+	private int version;
 }

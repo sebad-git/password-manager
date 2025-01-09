@@ -1,52 +1,48 @@
 package org.uy.sdm.pasman.controllers;
 
-import org.uy.sdm.pasman.dto.CommentDto;
-import org.uy.sdm.pasman.services.CommentService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.uy.sdm.pasman.dto.UserPasswordCreateDto;
+import org.uy.sdm.pasman.dto.credentialViewDto;
+import org.uy.sdm.pasman.services.CredentialService;
+import org.uy.sdm.pasman.util.crypto.EncryptionException;
 
-import org.uy.sdm.pasman.dto.PostDto;
-import org.uy.sdm.pasman.services.PostService;
-
-import java.util.List;
+import java.util.Collection;
 
 @Controller
 @RestController
 @RequestMapping(Endpoints.PASSWORD_CONTROLLER)
 public class PasswordController {
 
-	private final PostService postService;
-	private final CommentService commentService;
+	private final CredentialService credentialService;
 
-	public PasswordController(
-		final PostService postService,
-		final CommentService commentService
-	) {
-		this.postService = postService;
-		this.commentService = commentService;
+	public PasswordController(CredentialService credentialService) {
+		this.credentialService = credentialService;
 	}
 
-	@GetMapping(value = "/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public PostDto getPost(@PathVariable Long id) {
-		return postService.getPost(id);
-	}
-
-	@PostMapping(value = "/{postId}/comments")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public List<CommentDto> getCommentsForPost(@PathVariable Long postId) {
-		return commentService.getCommentsForPost(postId);
+	public ResponseEntity<Object> createCredential(@RequestBody UserPasswordCreateDto userPasswordCreateDto) {
+		try {
+			credentialService.addUserPassword(userPasswordCreateDto);
+			return ResponseEntity.status(HttpStatus.OK).build();
+		} catch (EncryptionException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
-	@GetMapping(value = "/{postId}/comments")
+	@GetMapping(value = "/{userName}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<CommentDto> getComments(@PathVariable Long postId) {
-		return commentService.getCommentsForPost(postId);
+	public Collection<credentialViewDto> getUserPasswords(@PathVariable String userName) {
+		return credentialService.findByUserName(userName);
 	}
+
 }

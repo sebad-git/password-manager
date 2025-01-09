@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SimpleEncryption {
+public final class SimpleEncryption {
 
     public static SimpleEncryptor SHA_256() {
         return new Sha256();

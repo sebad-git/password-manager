@@ -7,7 +7,7 @@ import org.uy.sdm.pasman.model.UserPasswords;
 import java.util.Collection;
 
 @Repository
-public interface UserPasswordsRepo extends JpaRepository<UserPasswords,Long> {
+public interface CredentialRepo extends JpaRepository<UserPasswords,Long> {
 
 	Collection<UserPasswords> findByUserId(final Long userId);
 }

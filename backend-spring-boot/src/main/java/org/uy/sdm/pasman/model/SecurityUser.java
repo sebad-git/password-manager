@@ -1,12 +1,14 @@
 package org.uy.sdm.pasman.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,10 +29,14 @@ public class SecurityUser implements Serializable, UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
+	private Long id;
+	@Unique
 	private String username;
 	private String lastName;
 	private String firstName;
 	private String middleName;
+	@Unique
 	private String email;
 	private boolean accountNonExpired;
 	private boolean accountNonLocked;
