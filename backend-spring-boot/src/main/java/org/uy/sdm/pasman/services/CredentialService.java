@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public interface CredentialService {
 
-	void addUserPassword(UserPasswordCreateDto userPasswordCreateDto) throws EncryptionException;
+	void addUserPassword(UserPasswordCreateDto userPasswordCreateDto);
 	Collection<credentialViewDto> findByUserName(final String userName);
 
 }

@@ -1,6 +1,6 @@
 package org.uy.sdm.pasman.util.crypto;
 
-public class EncryptionException extends Exception{
+public class EncryptionException extends RuntimeException {
 
     public EncryptionException(Exception e){
         super(e);

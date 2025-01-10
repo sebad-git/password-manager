@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = DataTables.PASSWORDS)
+@Table(name = DataTables.USER_PASSWORDS)
 public class UserPasswords implements Serializable {
 
 	@Serial
@@ -26,11 +26,12 @@ public class UserPasswords implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Column(nullable = false)
 	private Long userId;
-	@Column(length = 4096)
-	private String userValue;
-	@Column(length = 4096)
-	private String passwordValue;
+	@Column(length = 4096, nullable = false)
+	private String userName;
+	@Column(length = 4096, nullable = false)
+	private String userPassword;
 	@Version
 	private int version;
 }

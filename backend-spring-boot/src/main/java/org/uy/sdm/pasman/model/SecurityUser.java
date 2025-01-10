@@ -1,5 +1,6 @@
 package org.uy.sdm.pasman.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -8,9 +9,9 @@ import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.uy.sdm.pasman.dto.NewUserDto;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -31,21 +32,26 @@ public class SecurityUser implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Unique
+	@Column(unique = true, nullable = false)
 	private String username;
 	private String lastName;
+	@Column(nullable = false)
 	private String firstName;
 	private String middleName;
-	@Unique
+	@Column(unique = true, nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private boolean accountNonExpired;
+	@Column(nullable = false)
 	private boolean accountNonLocked;
+	@Column(nullable = false)
 	private boolean credentialsNonExpired;
+	@Column(nullable = false)
 	private boolean enabled;
-	private String externalId;
+	@Column(nullable = false)
 	private String password;
-	private LocalDate createdDate;
-	private String displayName;
+	@Column(nullable = false)
+	private LocalDate updatedDate;
 	@Version
 	private int version;
 
@@ -53,4 +59,19 @@ public class SecurityUser implements Serializable, UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.emptyList();
 	}
+
+	public SecurityUser(NewUserDto userDto){
+		this.setUsername(userDto.username());
+		this.setPassword(userDto.password());
+		this.setEmail(userDto.email());
+		this.setFirstName(userDto.firstName());
+		this.setMiddleName(userDto.middleName());
+		this.setLastName(userDto.lastName());
+		this.setUpdatedDate(LocalDate.now());
+		this.setEnabled(true);
+		this.setAccountNonLocked(true);
+		this.setAccountNonExpired(true);
+		this.setCredentialsNonExpired(true);
+	}
+
 }

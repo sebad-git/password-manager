@@ -8,4 +8,7 @@ import org.uy.sdm.pasman.model.SecurityUser;
 public interface UserRepo extends JpaRepository<SecurityUser,Long> {
 
 	SecurityUser findByUsernameIgnoreCase(String username);
+
+	SecurityUser findByUsernameIgnoreCaseAndPassword(String userName, String password);
+
 }
