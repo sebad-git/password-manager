@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.uy.sdm.pasman.services.exceptions.CredentialNotFoundException;
 import org.uy.sdm.pasman.util.crypto.EncryptionException;
 
 @ControllerAdvice
@@ -27,6 +28,12 @@ public class AppExceptionHandler {
 		final String errorMessage = String.format("An Encryption error occurred: [%s].",ex.getMessage());
 		LOGGER.error(errorMessage,ex);
 		return ResponseEntity.badRequest().body(errorMessage);
+	}
+
+	@ExceptionHandler(CredentialNotFoundException.class)
+	public ResponseEntity<String> handleCredentialNotFoundException(CredentialNotFoundException ex) {
+		LOGGER.error(ex.getMessage(),ex);
+		return ResponseEntity.badRequest().body(ex.getMessage());
 	}
 
 	@ExceptionHandler(JsonProcessingException.class)

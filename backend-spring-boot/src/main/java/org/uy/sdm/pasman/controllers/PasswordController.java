@@ -3,6 +3,7 @@ package org.uy.sdm.pasman.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +32,13 @@ public class PasswordController {
 	}
 
 	@GetMapping
-	public Collection<CredentialViewDto> getUserCredentials() {
-		return credentialService.findCredentials();
+	public ResponseEntity<Collection<CredentialViewDto>> getUserCredentials() {
+		return ResponseEntity.ok(credentialService.findCredentials());
+	}
+
+	@GetMapping("/{credentialId:[0-9]+}")
+	public ResponseEntity<CredentialViewDto> seeUserCredential(@PathVariable Long credentialId) {
+		return ResponseEntity.ok(credentialService.openCredential(credentialId));
 	}
 
 }

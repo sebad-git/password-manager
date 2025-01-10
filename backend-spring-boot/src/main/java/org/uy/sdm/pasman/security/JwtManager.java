@@ -1,6 +1,7 @@
 package org.uy.sdm.pasman.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -105,7 +106,7 @@ public class JwtManager {
 	public boolean isValid(String jwt) {
 		try {
 			return isSigned(jwt) && !isExpired(jwt);
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | ExpiredJwtException e) {
 			LOGGER.info("Error validating token. Error:{}",e.getMessage());
 			return false;
 		}

@@ -10,6 +10,7 @@ import org.uy.sdm.pasman.model.UserCredentials;
 import org.uy.sdm.pasman.repos.CredentialRepo;
 import org.uy.sdm.pasman.services.CredentialService;
 import org.uy.sdm.pasman.services.UserService;
+import org.uy.sdm.pasman.services.exceptions.CredentialNotFoundException;
 
 import java.util.Collection;
 
@@ -40,15 +41,29 @@ public class CredentialServiceImpl implements CredentialService {
 	public Collection<CredentialViewDto> findCredentials() {
 		final SecurityUser securityUser = userService.getCurrentUser();
 		final Collection<UserCredentials> userCredentialsList = credentialRepo.findByUserId(securityUser.getId());
-		return userCredentialsList.stream().map(userCredentials -> {
-			final String password = securityUser.getPassword();
-			return new CredentialViewDto(
-				AES().decrypt(password, userCredentials.getUserName()),
-				AES().decrypt(password, userCredentials.getUserPassword()),
-				userCredentials.getName(),
-				userCredentials.getUrl()
-			);
-		}).toList();
+		return userCredentialsList.stream().map(userCredentials -> new CredentialViewDto(
+			userCredentials.getId(),
+			userCredentials.getUserName(),
+			userCredentials.getUserPassword(),
+			userCredentials.getName(),
+			userCredentials.getUrl()
+		)).toList();
+	}
+
+	@Override
+	public CredentialViewDto openCredential(Long credentialId) {
+		final SecurityUser securityUser = userService.getCurrentUser();
+		final UserCredentials userCredential = this.credentialRepo.findById(credentialId).orElse(null);
+		if(userCredential==null)
+			throw new CredentialNotFoundException();
+		final String password = securityUser.getPassword();
+		return new CredentialViewDto(
+			userCredential.getId(),
+			AES().decrypt(password, userCredential.getUserName()),
+			AES().decrypt(password, userCredential.getUserPassword()),
+			userCredential.getName(),
+			userCredential.getUrl()
+		);
 	}
 
 }
