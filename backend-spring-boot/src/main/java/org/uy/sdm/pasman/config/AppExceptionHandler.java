@@ -1,5 +1,6 @@
 package org.uy.sdm.pasman.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,21 @@ public class AppExceptionHandler {
 
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<String> handleIUsernameNotFoundException(UsernameNotFoundException ex) {
-		final String errorMessage = String.format("Username Not found: %s",ex.getMessage());
+		final String errorMessage = String.format("Username Not found: [%s].",ex.getMessage());
 		LOGGER.error(errorMessage,ex);
 		return ResponseEntity.badRequest().body(errorMessage);
 	}
 
 	@ExceptionHandler(EncryptionException.class)
 	public ResponseEntity<String> handleIEncryptionException(EncryptionException ex) {
-		final String errorMessage = String.format("An Encryption error occurred: %s",ex.getMessage());
+		final String errorMessage = String.format("An Encryption error occurred: [%s].",ex.getMessage());
+		LOGGER.error(errorMessage,ex);
+		return ResponseEntity.badRequest().body(errorMessage);
+	}
+
+	@ExceptionHandler(JsonProcessingException.class)
+	public ResponseEntity<String> handleJacksonException(JsonProcessingException ex) {
+		final String errorMessage = String.format("An exception occurred parsing json object: [%s].",ex.getMessage());
 		LOGGER.error(errorMessage,ex);
 		return ResponseEntity.badRequest().body(errorMessage);
 	}

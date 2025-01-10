@@ -8,6 +8,6 @@ import java.util.Collection;
 public interface CredentialService {
 
 	void addUserCredential(NewUserCredentialDto userPasswordCreateDto);
-	Collection<CredentialViewDto> findByUserName(final String userName);
+	Collection<CredentialViewDto> findCredentials();
 
 }

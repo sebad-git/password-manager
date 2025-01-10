@@ -1,7 +1,6 @@
 package org.uy.sdm.pasman.services.implementation;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.uy.sdm.pasman.dto.CredentialViewDto;
@@ -9,8 +8,8 @@ import org.uy.sdm.pasman.dto.NewUserCredentialDto;
 import org.uy.sdm.pasman.model.SecurityUser;
 import org.uy.sdm.pasman.model.UserCredentials;
 import org.uy.sdm.pasman.repos.CredentialRepo;
-import org.uy.sdm.pasman.repos.UserRepo;
 import org.uy.sdm.pasman.services.CredentialService;
+import org.uy.sdm.pasman.services.UserService;
 
 import java.util.Collection;
 
@@ -22,11 +21,11 @@ import static org.uy.sdm.pasman.util.crypto.symmetric.SymmetricEncryption.AES;
 public class CredentialServiceImpl implements CredentialService {
 
 	private final CredentialRepo credentialRepo;
-	private final UserRepo userRepo;
+	private final UserService userService;
 
 	@Override
 	public void addUserCredential(NewUserCredentialDto userPasswordCreateDto) {
-		final SecurityUser securityUser = getUser(userPasswordCreateDto.userName());
+		final SecurityUser securityUser = userService.getCurrentUser();
 		final String password = securityUser.getPassword();
 		final UserCredentials userCredential = new UserCredentials();
 		userCredential.setUserId(securityUser.getId());
@@ -38,8 +37,8 @@ public class CredentialServiceImpl implements CredentialService {
 	}
 
 	@Override
-	public Collection<CredentialViewDto> findByUserName(final String userName) {
-		final SecurityUser securityUser = getUser(userName);
+	public Collection<CredentialViewDto> findCredentials() {
+		final SecurityUser securityUser = userService.getCurrentUser();
 		final Collection<UserCredentials> userCredentialsList = credentialRepo.findByUserId(securityUser.getId());
 		return userCredentialsList.stream().map(userCredentials -> {
 			final String password = securityUser.getPassword();
@@ -50,13 +49,6 @@ public class CredentialServiceImpl implements CredentialService {
 				userCredentials.getUrl()
 			);
 		}).toList();
-	}
-
-	private SecurityUser getUser(final String userName) {
-		final SecurityUser securityUser = userRepo.findByUsernameIgnoreCase(userName);
-		if (securityUser == null)
-			throw new UsernameNotFoundException(userName);
-		return securityUser;
 	}
 
 }
