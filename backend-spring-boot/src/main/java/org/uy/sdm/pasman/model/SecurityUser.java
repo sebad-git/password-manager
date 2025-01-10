@@ -61,7 +61,7 @@ public class SecurityUser implements Serializable, UserDetails {
 	}
 
 	public SecurityUser(NewUserDto userDto){
-		this.setUsername(userDto.username());
+		this.setUsername(userDto.user());
 		this.setPassword(userDto.password());
 		this.setEmail(userDto.email());
 		this.setFirstName(userDto.firstName());

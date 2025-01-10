@@ -9,12 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.uy.sdm.pasman.dto.NewUserDto;
-import org.uy.sdm.pasman.dto.UserDataDto;
 import org.uy.sdm.pasman.model.SecurityUser;
 import org.uy.sdm.pasman.repos.UserRepo;
 import org.uy.sdm.pasman.services.UserService;
-
-import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -25,16 +22,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDataDto createUser(final NewUserDto userDto) {
+	public void createUser(final NewUserDto userDto) {
 		SecurityUser securityUser = new SecurityUser(userDto);
 		securityUser.setPassword(passwordEncoder.encode(securityUser.getPassword()));
-		securityUser = userRepo.save(securityUser);
-		return new UserDataDto(
-			securityUser.getUsername(),
-			securityUser.getLastName(),
-			securityUser.getFirstName(),
-			securityUser.getMiddleName()
-		);
+		userRepo.save(securityUser);
 	}
 
 	@Override

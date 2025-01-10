@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.uy.sdm.pasman.dto.UserPasswordCreateDto;
-import org.uy.sdm.pasman.dto.credentialViewDto;
+import org.uy.sdm.pasman.dto.CredentialViewDto;
+import org.uy.sdm.pasman.dto.NewUserCredentialDto;
 import org.uy.sdm.pasman.model.SecurityUser;
-import org.uy.sdm.pasman.model.UserPasswords;
+import org.uy.sdm.pasman.model.UserCredentials;
 import org.uy.sdm.pasman.repos.CredentialRepo;
 import org.uy.sdm.pasman.repos.UserRepo;
 import org.uy.sdm.pasman.services.CredentialService;
-import org.uy.sdm.pasman.util.crypto.EncryptionException;
-import org.uy.sdm.pasman.util.crypto.symmetric.SymmetricEncryption;
 
 import java.util.Collection;
+
+import static org.uy.sdm.pasman.util.crypto.symmetric.SymmetricEncryption.AES;
 
 @Service
 @Transactional
@@ -25,29 +25,29 @@ public class CredentialServiceImpl implements CredentialService {
 	private final UserRepo userRepo;
 
 	@Override
-	public void addUserPassword(UserPasswordCreateDto userPasswordCreateDto) {
+	public void addUserCredential(NewUserCredentialDto userPasswordCreateDto) {
 		final SecurityUser securityUser = getUser(userPasswordCreateDto.userName());
-		final UserPasswords userPasswords = new UserPasswords();
 		final String password = securityUser.getPassword();
-		userPasswords.setId(securityUser.getId());
-		userPasswords.setUserName(
-			SymmetricEncryption.AES().encrypt(password, userPasswords.getUserName())
-		);
-		userPasswords.setUserPassword(
-			SymmetricEncryption.AES().encrypt(password, userPasswords.getUserPassword())
-		);
-		credentialRepo.save(userPasswords);
+		final UserCredentials userCredential = new UserCredentials();
+		userCredential.setUserId(securityUser.getId());
+		userCredential.setUserName(AES().encrypt(password, userPasswordCreateDto.credentialUser()));
+		userCredential.setUserPassword(AES().encrypt(password, userPasswordCreateDto.credentialPassword()));
+		userCredential.setName(userPasswordCreateDto.name());
+		userCredential.setUrl(userPasswordCreateDto.url());
+		credentialRepo.save(userCredential);
 	}
 
 	@Override
-	public Collection<credentialViewDto> findByUserName(final String userName) {
+	public Collection<CredentialViewDto> findByUserName(final String userName) {
 		final SecurityUser securityUser = getUser(userName);
-		final Collection<UserPasswords> userPasswordsList = credentialRepo.findByUserId(securityUser.getId());
-		return userPasswordsList.stream().map(userPasswords -> {
+		final Collection<UserCredentials> userCredentialsList = credentialRepo.findByUserId(securityUser.getId());
+		return userCredentialsList.stream().map(userCredentials -> {
 			final String password = securityUser.getPassword();
-			return new credentialViewDto(
-				SymmetricEncryption.AES().decrypt(password, userPasswords.getUserName()),
-				SymmetricEncryption.AES().decrypt(password, userPasswords.getUserName())
+			return new CredentialViewDto(
+				AES().decrypt(password, userCredentials.getUserName()),
+				AES().decrypt(password, userCredentials.getUserPassword()),
+				userCredentials.getName(),
+				userCredentials.getUrl()
 			);
 		}).toList();
 	}

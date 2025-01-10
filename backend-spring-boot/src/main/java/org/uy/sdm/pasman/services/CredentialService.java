@@ -1,14 +1,13 @@
 package org.uy.sdm.pasman.services;
 
-import org.uy.sdm.pasman.dto.UserPasswordCreateDto;
-import org.uy.sdm.pasman.dto.credentialViewDto;
-import org.uy.sdm.pasman.util.crypto.EncryptionException;
+import org.uy.sdm.pasman.dto.NewUserCredentialDto;
+import org.uy.sdm.pasman.dto.CredentialViewDto;
 
 import java.util.Collection;
 
 public interface CredentialService {
 
-	void addUserPassword(UserPasswordCreateDto userPasswordCreateDto);
-	Collection<credentialViewDto> findByUserName(final String userName);
+	void addUserCredential(NewUserCredentialDto userPasswordCreateDto);
+	Collection<CredentialViewDto> findByUserName(final String userName);
 
 }

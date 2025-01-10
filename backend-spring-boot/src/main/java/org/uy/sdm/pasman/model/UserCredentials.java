@@ -9,6 +9,7 @@ import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.uy.sdm.pasman.dto.NewUserCredentialDto;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,8 +18,8 @@ import java.io.Serializable;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = DataTables.USER_PASSWORDS)
-public class UserPasswords implements Serializable {
+@Table(name = DataTables.USER_CREDENTIALS)
+public class UserCredentials implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
@@ -32,6 +33,10 @@ public class UserPasswords implements Serializable {
 	private String userName;
 	@Column(length = 4096, nullable = false)
 	private String userPassword;
+	@Column(nullable = false)
+	private String name;
+	private String url;
+
 	@Version
 	private int version;
 }

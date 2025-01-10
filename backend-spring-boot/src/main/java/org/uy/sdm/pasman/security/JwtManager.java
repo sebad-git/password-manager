@@ -38,7 +38,7 @@ public class JwtManager {
 	public static final long JWT_TOKEN_LIFETIME_IN_MS = 60;
 	public static final long JWT_TOKEN_LIFETIME_IN_SEC = JWT_TOKEN_LIFETIME_IN_MS * 60000L;
 
-	public static final String SEC_JWT_COOKIE = "se-jwt";
+	public static final String SEC_JWT_COOKIE = "pm-jwt";
 
 	public static final String USER_KEY = "usr";
 	public static final String SESSION_KEY = "session";
