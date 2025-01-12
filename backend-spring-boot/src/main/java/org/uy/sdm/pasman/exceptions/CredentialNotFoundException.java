@@ -1,4 +1,4 @@
-package org.uy.sdm.pasman.services.exceptions;
+package org.uy.sdm.pasman.exceptions;
 
 public class CredentialNotFoundException extends RuntimeException {
 

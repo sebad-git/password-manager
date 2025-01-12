@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.uy.sdm.pasman.dto.credentials.CredentialViewDto;
 import org.uy.sdm.pasman.dto.credentials.NewUserCredentialDto;
+import org.uy.sdm.pasman.dto.credentials.UpdateUserCredentialDto;
 import org.uy.sdm.pasman.services.CredentialService;
 
 import java.util.Collection;
@@ -24,10 +25,16 @@ public class CredentialController {
 		this.credentialService = credentialService;
 	}
 
-	@PostMapping
-	public ResponseEntity<String> createCredential(@RequestBody NewUserCredentialDto userPasswordCreateDto) {
-			credentialService.addUserCredential(userPasswordCreateDto);
+	@PostMapping("create")
+	public ResponseEntity<String> createCredential(@RequestBody NewUserCredentialDto userCredentialDto) {
+			credentialService.addUserCredential(userCredentialDto);
 			return ResponseEntity.ok("Credential created successfully.");
+	}
+
+	@PostMapping("update")
+	public ResponseEntity<String> updateCredential(@RequestBody UpdateUserCredentialDto userCredentialDto) {
+		credentialService.updateUserCredential(userCredentialDto);
+		return ResponseEntity.ok("Credential updated successfully.");
 	}
 
 	@GetMapping

@@ -36,7 +36,8 @@ public class UserCredentials implements Serializable {
 	private String userName;
 	@Column(length = 4096, nullable = false)
 	private String userPassword;
-
+	@Column(nullable = false)
+	private String vulnerability;
 	@OneToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "site_id", referencedColumnName = "id", nullable = false)
 	private AccountType accountType;

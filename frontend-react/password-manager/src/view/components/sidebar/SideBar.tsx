@@ -6,7 +6,7 @@ const SideBar: React.FC = () => {
 
   return <>
     <div className="sidebar">
-        <a href="#dashboard">
+        <a href="/">
             <span className="material-icons">home</span> 
             <h6>Home</h6> 
         </a>

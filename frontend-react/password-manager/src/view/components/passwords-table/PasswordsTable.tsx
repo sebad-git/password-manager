@@ -46,12 +46,12 @@ const PasswordsTable: React.FC = () => {
             <td>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <img
-                  src={credential.site.logo || "placeholder-logo.png"}
+                  src={credential.accountType.logo || "placeholder-logo.png"}
                   alt={credential.name}
                   style={{ width: 24, height: 24, marginRight: 8 }}
                 />
-                <a className="pm-site" href={credential.site.url} target="_blank" rel="noopener noreferrer">
-                  {credential.name}
+                <a className="pm-site" href={credential.accountType.url} target="_blank" rel="noopener noreferrer">
+                  {credential.accountType.name}
                 </a>
               </div>
             </td>

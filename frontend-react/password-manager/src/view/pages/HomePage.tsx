@@ -1,48 +1,32 @@
 import React from "react";
-import SideBar from "../components/sidebar/SideBar";
 import Card from "../components/card/Card";
 import PasswordsTable from "../components/passwords-table/PasswordsTable";
-import Main from "../layout/main-content/Main";
+import MainLayout from "../layout/main-content/MainLayout";
+import DashBoardCard from "../components/dashboard-card/DashBoardCard";
 
 const HomePage: React.FC = () => {
   return <>
-  <SideBar/>
-    <Main>
-        <br/>
+    <MainLayout>
+        <br/><br/>
         <div className="row mb-4">
             <div className="col-lg-4">
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Total Passwords</h5>
-                        <p className="card-text" id="total-passwords">50</p>
-                    </div>
-                </div>
+                <DashBoardCard title="Total Passwords" content="50"/>
             </div>
             <div className="col-lg-4">
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Recently Added</h5>
-                        <p className="card-text" id="recent-password">example.com</p>
-                    </div>
-                </div>
+                <DashBoardCard title="Recently Added" content="Google"/>
             </div>
             <div className="col-lg-4">
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Recently Retrieved</h5>
-                        <p className="card-text" id="recent-retrieved">another.com</p>
-                    </div>
-                </div>
+                <DashBoardCard title="Vulnerable Passwords" content="2"/>
             </div>
         </div>
 
-        <Card id="passwords" header="Password List">
+        <Card id="passwords" title="Password List">
             <PasswordsTable/>
         </Card>
 
         <br/>
 
-    </Main>
+    </MainLayout>
   </>;
 };
 

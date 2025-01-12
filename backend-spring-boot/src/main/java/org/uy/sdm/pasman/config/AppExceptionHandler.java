@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.uy.sdm.pasman.services.exceptions.CredentialNotFoundException;
+import org.uy.sdm.pasman.exceptions.CredentialNotFoundException;
 import org.uy.sdm.pasman.util.crypto.EncryptionException;
 
 @ControllerAdvice
@@ -24,7 +24,7 @@ public class AppExceptionHandler {
 	}
 
 	@ExceptionHandler(EncryptionException.class)
-	public ResponseEntity<String> handleIEncryptionException(EncryptionException ex) {
+	public ResponseEntity<String> handleEncryptionException(EncryptionException ex) {
 		final String errorMessage = String.format("An Encryption error occurred: [%s].",ex.getMessage());
 		LOGGER.error(errorMessage,ex);
 		return ResponseEntity.badRequest().body(errorMessage);
