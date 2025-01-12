@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.uy.sdm.pasman.dto.NewUserDto;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -34,12 +33,10 @@ public class SecurityUser implements Serializable, UserDetails {
 	private Long id;
 	@Column(unique = true, nullable = false)
 	private String username;
-	private String lastName;
-	@Column(nullable = false)
-	private String firstName;
-	private String middleName;
 	@Column(unique = true, nullable = false)
 	private String email;
+	@Column(nullable = false)
+	private String password;
 	@Column(nullable = false)
 	private boolean accountNonExpired;
 	@Column(nullable = false)
@@ -49,8 +46,6 @@ public class SecurityUser implements Serializable, UserDetails {
 	@Column(nullable = false)
 	private boolean enabled;
 	@Column(nullable = false)
-	private String password;
-	@Column(nullable = false)
 	private LocalDate updatedDate;
 	@Version
 	private int version;
@@ -58,20 +53,6 @@ public class SecurityUser implements Serializable, UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.emptyList();
-	}
-
-	public SecurityUser(NewUserDto userDto){
-		this.setUsername(userDto.user());
-		this.setPassword(userDto.password());
-		this.setEmail(userDto.email());
-		this.setFirstName(userDto.firstName());
-		this.setMiddleName(userDto.middleName());
-		this.setLastName(userDto.lastName());
-		this.setUpdatedDate(LocalDate.now());
-		this.setEnabled(true);
-		this.setAccountNonLocked(true);
-		this.setAccountNonExpired(true);
-		this.setCredentialsNonExpired(true);
 	}
 
 }

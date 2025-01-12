@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 final class Endpoints {
 	public static final String USER_CREDENTIAL_CONTROLLER = "credentials";
 	public static final String USER_CONTROLLER = "users";
-
+	public static final String ACCOUNT_TYPE_CONTROLLER = "account-types";
 }

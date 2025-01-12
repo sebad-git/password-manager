@@ -13,11 +13,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.uy.sdm.pasman.dto.NewUserDto;
+import org.uy.sdm.pasman.dto.user.NewUserDto;
 import org.uy.sdm.pasman.model.SecurityUser;
 import org.uy.sdm.pasman.repos.UserRepo;
 import org.uy.sdm.pasman.services.UserService;
 import org.uy.sdm.pasman.util.jackson.Jackson;
+
+import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -31,9 +33,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void createUser(final NewUserDto userDto) {
-		SecurityUser securityUser = new SecurityUser(userDto);
-		securityUser.setPassword(passwordEncoder.encode(securityUser.getPassword()));
-		userRepo.save(securityUser);
+		SecurityUser user = new SecurityUser();
+		user.setUsername(userDto.username());
+		user.setPassword(userDto.password());
+		user.setEmail(userDto.email());
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setEnabled(true);
+		user.setAccountNonLocked(true);
+		user.setAccountNonExpired(true);
+		user.setCredentialsNonExpired(true);
+		user.setUpdatedDate(LocalDate.now());
+		userRepo.save(user);
 	}
 
 	@Override

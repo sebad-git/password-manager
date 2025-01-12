@@ -22,7 +22,7 @@ const PasswordsTable: React.FC = () => {
           <span className="visually-hidden">Loading...</span> </div> 
       </div>}
     </div>
-    <table className="table table-hover">
+    <table className="table">
     <thead>
       <tr>
         <th>Service</th>

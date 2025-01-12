@@ -14,7 +14,7 @@ export class CredentialsService extends BaseService {
     return [
       {
         name: "Google",
-        site: {
+        accountType: {
           name:"",
           logo: "https://google.com/favicon.ico",
           url: "https://google.com",
@@ -25,7 +25,7 @@ export class CredentialsService extends BaseService {
       },
       {
         name: "Facebook",
-        site: {
+        accountType: {
           name:"",
           logo: "https://facebook.com/favicon.ico",
           url: "https://facebook.com",
@@ -36,7 +36,7 @@ export class CredentialsService extends BaseService {
       },
       {
         name: "Facebook",
-        site: {
+        accountType: {
           name:"",
           logo: "https://twitter.com/favicon.ico",
           url: "https://twitter.com",

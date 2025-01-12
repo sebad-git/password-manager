@@ -1,4 +1,4 @@
-export interface Site {
+export interface AccountType {
     name: string;
     logo: string;
     url: string;

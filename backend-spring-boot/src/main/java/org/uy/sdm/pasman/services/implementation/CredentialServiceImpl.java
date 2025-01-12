@@ -3,14 +3,15 @@ package org.uy.sdm.pasman.services.implementation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.uy.sdm.pasman.dto.CredentialViewDto;
-import org.uy.sdm.pasman.dto.NewUserCredentialDto;
+import org.uy.sdm.pasman.dto.accountTypes.AccountTypeDto;
+import org.uy.sdm.pasman.dto.credentials.CredentialViewDto;
+import org.uy.sdm.pasman.dto.credentials.NewUserCredentialDto;
+import org.uy.sdm.pasman.model.AccountType;
 import org.uy.sdm.pasman.model.SecurityUser;
 import org.uy.sdm.pasman.model.UserCredentials;
 import org.uy.sdm.pasman.repos.CredentialRepo;
 import org.uy.sdm.pasman.services.CredentialService;
 import org.uy.sdm.pasman.services.UserService;
-import org.uy.sdm.pasman.services.exceptions.CredentialNotFoundException;
 
 import java.util.Collection;
 
@@ -32,38 +33,33 @@ public class CredentialServiceImpl implements CredentialService {
 		userCredential.setUserId(securityUser.getId());
 		userCredential.setUserName(AES().encrypt(password, userPasswordCreateDto.credentialUser()));
 		userCredential.setUserPassword(AES().encrypt(password, userPasswordCreateDto.credentialPassword()));
-		userCredential.setName(userPasswordCreateDto.name());
-		userCredential.setUrl(userPasswordCreateDto.url());
+		final AccountType accountType = new AccountType();
+		userCredential.setAccountType(new AccountType());
+		accountType.setName(userPasswordCreateDto.accountType().name());
+		accountType.setUrl(userPasswordCreateDto.accountType().url());
+
+
+		accountType.setLogo(userPasswordCreateDto.accountType().logo());
+
+		userCredential.setAccountType(accountType);
 		credentialRepo.save(userCredential);
 	}
 
 	@Override
-	public Collection<CredentialViewDto> findCredentials() {
+	public Collection<CredentialViewDto> getCredentials() {
 		final SecurityUser securityUser = userService.getCurrentUser();
 		final Collection<UserCredentials> userCredentialsList = credentialRepo.findByUserId(securityUser.getId());
+		final String password = securityUser.getPassword();
 		return userCredentialsList.stream().map(userCredentials -> new CredentialViewDto(
 			userCredentials.getId(),
-			userCredentials.getUserName(),
-			userCredentials.getUserPassword(),
-			userCredentials.getName(),
-			userCredentials.getUrl()
+			AES().decrypt(password, userCredentials.getUserName()),
+			AES().decrypt(password, userCredentials.getUserPassword()),
+			new AccountTypeDto(
+				userCredentials.getAccountType().getName(),
+				userCredentials.getAccountType().getUrl(),
+				userCredentials.getAccountType().getLogo()
+			)
 		)).toList();
-	}
-
-	@Override
-	public CredentialViewDto openCredential(Long credentialId) {
-		final SecurityUser securityUser = userService.getCurrentUser();
-		final UserCredentials userCredential = this.credentialRepo.findById(credentialId).orElse(null);
-		if(userCredential==null)
-			throw new CredentialNotFoundException();
-		final String password = securityUser.getPassword();
-		return new CredentialViewDto(
-			userCredential.getId(),
-			AES().decrypt(password, userCredential.getUserName()),
-			AES().decrypt(password, userCredential.getUserPassword()),
-			userCredential.getName(),
-			userCredential.getUrl()
-		);
 	}
 
 }
