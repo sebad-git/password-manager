@@ -1,0 +1,13 @@
+.card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: var(--card-text-color);
+    background: white;
+    box-shadow: var(--card-shadow);
+  }
+
+  .card-header {
+    font-weight: bolder;
+    color: blueviolet;
+    background: white !important;
+  }
