@@ -21,7 +21,7 @@ export class CredentialsService extends BaseService {
         },
         username: "user1@gmail.com",
         password: "secure123",
-        vulnerability: "low",
+        vulnerability: "medium",
       },
       {
         name: "Facebook",
@@ -32,7 +32,18 @@ export class CredentialsService extends BaseService {
         },
         username: "user2@gmail.com",
         password: "password123",
-        vulnerability: "medium",
+        vulnerability: "high",
+      },
+      {
+        name: "Facebook",
+        site: {
+          name:"",
+          logo: "https://twitter.com/favicon.ico",
+          url: "https://twitter.com",
+        },
+        username: "user2@gmail.com",
+        password: "password123",
+        vulnerability: "low",
       },
     ];
   }

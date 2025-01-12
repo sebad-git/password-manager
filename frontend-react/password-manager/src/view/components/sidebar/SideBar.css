@@ -3,24 +3,21 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 15.625rem;
+    width: 6rem;
     margin-top: 2rem;
     margin-left: 0.5rem;
     height: 90%;
-    background-image: linear-gradient(195deg, #42424a 0%, #191919 100%);
+    background: #2d2d2d;
     color: white;
-    padding: 1rem 1rem 1rem;
-    box-shadow: none;
-    border-radius: 15px;
-  }
-  
-  .sidebar h4 {
     text-align: center;
-    padding-bottom: 0.2rem;
+    align-items: center;
+    box-shadow: none;
+    border-radius: 10px;
+    padding-top: 2rem;
   }
-  
-  .sidebar hr {
-    border-top: 1px solid white;
+
+  .material-icons{
+    margin-left: 0.5rem;
   }
   
   .sidebar a {
@@ -29,6 +26,10 @@
     padding: 10px;
     text-decoration: none;
     margin: 5px 0;
+  }
+
+  .fisrt-icon {
+    margin-top: 2rem;
   }
   
   .sidebar a:hover {

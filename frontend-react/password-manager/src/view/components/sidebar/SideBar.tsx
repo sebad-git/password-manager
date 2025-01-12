@@ -6,22 +6,21 @@ const SideBar: React.FC = () => {
 
   return <>
     <div className="sidebar">
-        <h4>Password Manager</h4>
-        <hr/>
         <a href="#dashboard">
-            <span className="material-icons">home</span> Dashboard
+            <span className="material-icons">home</span> 
+            <h6>Home</h6> 
+        </a>
+        <a href="#dashboard">
+            <span className="material-icons">add</span>
+            <h6>Add</h6>
         </a>
         <a href="#vulnerable-passwords">
-            <span className="material-icons">warning</span> Vulnerable Passwords
-        </a>
-        <a href="#saved-passwords">
-            <span className="material-icons">lock</span> Saved Passwords
-        </a>
-        <a href="#recent-activity">
-            <span className="material-icons">history</span> Recent Activity
+            <span className="material-icons">warning</span>
+            <h6>Vulnerable Passwords</h6>
         </a>
         <a href="#profile">
-            <span className="material-icons">person</span> Profile
+            <span className="material-icons">person</span>
+            <h6>Profile</h6>
         </a>
     </div>
   </>
