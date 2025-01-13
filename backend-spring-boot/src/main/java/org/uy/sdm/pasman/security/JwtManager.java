@@ -36,8 +36,8 @@ public class JwtManager {
 	@Value("${jwt.secretKey}")
 	private String jwtSecretKey;
 
-	public static final long JWT_TOKEN_LIFETIME_IN_MS = 60;
-	public static final long JWT_TOKEN_LIFETIME_IN_SEC = JWT_TOKEN_LIFETIME_IN_MS * 60000L;
+	private static final long JWT_TOKEN_LIFETIME_IN_MS = 7200L;
+	public static final long JWT_TOKEN_LIFETIME_IN_SEC = JWT_TOKEN_LIFETIME_IN_MS * 1000L;
 
 	public static final String SEC_JWT_COOKIE = "pm-jwt";
 

@@ -2,6 +2,7 @@ package org.uy.sdm.pasman.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,11 @@ public class UserController {
 	public ResponseEntity<String> createUser(@RequestBody NewUserDto userDto) {
 		userService.createUser(userDto);
 		return ResponseEntity.ok("User created successfully.");
+	}
+
+	@GetMapping("/isAuthenticated")
+	public ResponseEntity<Boolean> isUserAuthenticated() {
+		return ResponseEntity.ok(userService.isUserAuthenticated());
 	}
 
 }

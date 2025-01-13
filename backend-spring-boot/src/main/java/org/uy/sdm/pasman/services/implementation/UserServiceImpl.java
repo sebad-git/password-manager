@@ -75,4 +75,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}
 	}
 
+	public boolean isUserAuthenticated() {
+		if(SecurityContextHolder.getContext().getAuthentication()==null)
+			return false;
+		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+	}
+
 }

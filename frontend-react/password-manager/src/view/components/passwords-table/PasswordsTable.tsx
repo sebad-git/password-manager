@@ -67,10 +67,10 @@ const PasswordsTable: React.FC = () => {
             </td>
             <td>
               <div className="row">
-                <div className="col">
+                <div className="col-2">
                     <span className="material-icons action icon-black" onClick={() => showCredential(credential)}>edit</span>
                   </div>
-                  <div className="col">
+                  <div className="col-2">
                     <span className="material-icons action icon-red" onClick={() => showCredential(credential)}>delete</span>
                   </div>
               </div>

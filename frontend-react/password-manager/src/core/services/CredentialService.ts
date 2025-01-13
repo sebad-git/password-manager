@@ -10,7 +10,8 @@ export class CredentialsService extends BaseService {
   }
   
   async getCredentials(): Promise<Credentials[]> {
-    //return this.get<Credentials[]>(this.serviceUrl);
+    return this.get<Credentials[]>("credentials");
+    /*
     return [
       {
         name: "Google",
@@ -46,14 +47,11 @@ export class CredentialsService extends BaseService {
         vulnerability: "low",
       },
     ];
+    */
   }
 
   async addCredential(credential: Credentials): Promise<Credentials> {
     return this.post<Credentials, Credentials>(this.serviceUrl, credential);
-  }
-
-  async showCredential(credential: Credentials): Promise<Credentials[]> {
-    return this.post<Credentials, Credentials[]>(this.serviceUrl, credential);
   }
   
 }
