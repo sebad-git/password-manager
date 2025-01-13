@@ -48,6 +48,44 @@ body {
   box-shadow: 0 0 5px rgba(165, 40, 167, 0.5);
 }
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-form {
+  padding: 20px;
+}
+
+.login-form-spacer {
+  margin-top: 15px;
+}
+
+.login-form-label {
+  padding-top: 1rem;
+  font-weight: bold;
+}
+
+.login-form-input {
+  width: 100%;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  background-color: blueviolet !important;
+  color: white !important;
+}
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {

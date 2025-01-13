@@ -14,18 +14,8 @@ services:
         - POSTGRES_USER=passman
         - POSTGRES_PASSWORD=password
         - POSTGRES_DB=PASSWORD_MANAGER
-  mongodb-pm:
-    image: mongo:4.4.10
-    restart: "no"
-    container_name: mongodb-pm
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongodbUser
-      MONGO_INITDB_ROOT_PASSWORD: mongodbPassword
-      MONGODB_USERNAME: mongodbUser
-      MONGODB_PASSWORD: mongodbPassword
-      MONGO_INITDB_DATABASE: password_manager
+    volumes:
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
   pm-network:
     driver: bridge

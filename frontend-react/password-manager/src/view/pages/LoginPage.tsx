@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Card from "../components/card/Card";
-import "./LoginPage.css";
 import { UserService } from "../../core/services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../router/AuthContext";
