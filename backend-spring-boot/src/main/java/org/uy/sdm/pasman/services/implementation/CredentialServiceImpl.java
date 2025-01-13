@@ -40,15 +40,15 @@ public class CredentialServiceImpl implements CredentialService {
 		final String password = securityUser.getPassword();
 		final UserCredentials userCredential = new UserCredentials();
 		userCredential.setUserId(securityUser.getId());
-		userCredential.setUserName(AES().encrypt(password, userPasswordCreateDto.credentialUser()));
-		userCredential.setUserPassword(AES().encrypt(password, userPasswordCreateDto.credentialPassword()));
+		userCredential.setUserName(AES().encrypt(password, userPasswordCreateDto.username()));
+		userCredential.setUserPassword(AES().encrypt(password, userPasswordCreateDto.password()));
 		final AccountType accountType = new AccountType();
 		userCredential.setAccountType(new AccountType());
 		accountType.setName(userPasswordCreateDto.accountType().name());
 		accountType.setUrl(userPasswordCreateDto.accountType().url());
 		accountType.setLogo(userPasswordCreateDto.accountType().logo());
 		userCredential.setAccountType(accountType);
-		userCredential.setVulnerability(getVulnerability(userPasswordCreateDto.credentialPassword()));
+		userCredential.setVulnerability(getVulnerability(userPasswordCreateDto.password()));
 		credentialRepo.save(userCredential);
 	}
 
@@ -60,9 +60,9 @@ public class CredentialServiceImpl implements CredentialService {
 			throw new CredentialNotFoundException();
 		final SecurityUser securityUser = userService.getCurrentUser();
 		final String password = securityUser.getPassword();
-		userCredential.setUserName(AES().encrypt(password, updateUserCredentialDto.credentialUser()));
-		userCredential.setUserPassword(AES().encrypt(password, updateUserCredentialDto.credentialPassword()));
-		userCredential.setVulnerability(getVulnerability(updateUserCredentialDto.credentialPassword()));
+		userCredential.setUserName(AES().encrypt(password, updateUserCredentialDto.username()));
+		userCredential.setUserPassword(AES().encrypt(password, updateUserCredentialDto.password()));
+		userCredential.setVulnerability(getVulnerability(updateUserCredentialDto.password()));
 		credentialRepo.save(userCredential);
 	}
 
