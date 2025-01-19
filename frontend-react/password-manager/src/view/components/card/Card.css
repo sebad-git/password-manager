@@ -1,9 +1,13 @@
 .card {
     margin-bottom: 20px;
-    border-radius: 10px;
-    color: var(--card-text-color);
-    background: white;
-    box-shadow: var(--card-shadow);
+    color: white;
+    background: rgba(163, 215, 255, 0.1);
+    background: linear-gradient(135deg, #3b6bbe33 45%, #1b315630 100%) !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(163, 215, 255, 0.5);
   }
 
   .card-header {

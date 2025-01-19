@@ -31,11 +31,11 @@ public class SecurityUser implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 50)
 	private String username;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 50)
 	private String email;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String password;
 	@Column(nullable = false)
 	private boolean accountNonExpired;

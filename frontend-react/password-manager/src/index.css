@@ -9,11 +9,16 @@
   --card-shadow: 3px 3px 6px #bebebe,
   -3px -3px 6px white;
   --card-text-color:#191919;
+  --glow-color: rgb(176, 214, 255);
+  --glow-spread-color: rgba(123, 193, 255, 0.781);
+  --enhanced-glow-color: rgb(206, 229, 255);
 }
 
 body {
   font-family: var(--font-abel);
-  background-color: var(--main-background-color);
+  background: url('/src/view/assets/background1.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
   color: var(--main-text-color);
   margin: 0;
   padding: 0;
@@ -44,19 +49,66 @@ body {
 }
 
 .form-control:focus {
-  border-color: #8c28a7;
-  box-shadow: 0 0 5px rgba(165, 40, 167, 0.5);
+  border-color: #2885a7;
+  box-shadow: 8 8 10px rgba(40, 148, 167, 0.5);
+  background: transparent !important;
+  color: white !important;
 }
 
+.form-control {
+  background: rgba(93, 111, 230, 0.05);
+  backdrop-filter: blur(7.8px);
+  -webkit-backdrop-filter: blur(7.8px);
+  border: 1px solid rgba(149, 204, 245, 0.46);
+  color: white !important;
+}
+
+.btn {
+  --glow-color: rgb(176, 214, 255);
+  --glow-spread-color: rgba(123, 193, 255, 0.781);
+  --enhanced-glow-color: rgb(206, 229, 255);
+  --btn-color: rgb(61, 100, 136);
+  background: transparent !important;
+  color: white !important;
+  padding: 0.4rem;
+  border: 1px solid rgba(163, 215, 255, 0.5);
+  transition: 0.5s ease-in-out !important;
+  transform: scale(1) !important;
+}
+ 
+ .btn:hover {
+  color: var(--btn-color) !important;
+  background-color: var(--glow-color) !important;
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 1em .25em var(--glow-color),
+         0 0 4em 2em var(--glow-spread-color),
+         inset 0 0 .75em .25em var(--glow-color) !important;
+ }
+ 
+ .btn:active {
+  box-shadow: 0 0 0.6em .25em var(--glow-color),
+         0 0 2.5em 2em var(--glow-spread-color),
+         inset 0 0 .5em .25em var(--glow-color) !important;
+ }
+
+ hr { border-top: 1px solid #c0fdff59 !important; }
+
 .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  margin-left: 37%;
+  margin-top: 8%;
+  width: 30%;
 }
 
 .login-form {
-  padding: 20px;
+  padding: 3rem;
+}
+
+.login-form h4 {
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .login-form-spacer {
@@ -80,11 +132,6 @@ body {
 
 .text-center {
   text-align: center;
-}
-
-.btn {
-  background-color: blueviolet !important;
-  color: white !important;
 }
 
 /* Media queries for responsiveness */

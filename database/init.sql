@@ -23,4 +23,7 @@ CREATE TABLE account_type (
 INSERT INTO ACCOUNT_TYPE VALUES (1, 'Google', 'https://google.com', 'https://google.com/favicon.ico');
 INSERT INTO ACCOUNT_TYPE VALUES (2, 'Facebook', 'https://facebook.com', 'https://facebook.com/favicon.ico');
 INSERT INTO ACCOUNT_TYPE VALUES (3, 'Twitter', 'https://twitter.com', 'https://twitter.com/favicon.ico');
+INSERT INTO ACCOUNT_TYPE VALUES (3, 'Twitter', 'https://twitter.com', 'https://twitter.com/favicon.ico');
+INSERT INTO ACCOUNT_TYPE VALUES (4, 'Amazon', 'https://www.amazon.com', 'https://www.amazon.com/favicon.ico');
+INSERT INTO ACCOUNT_TYPE VALUES (5, 'Netflix', 'https://www.netflix.com', 'https://www.netflix.com/favicon.ico');
 

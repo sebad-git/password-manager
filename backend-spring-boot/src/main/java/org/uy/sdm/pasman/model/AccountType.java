@@ -25,11 +25,11 @@ public class AccountType implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 50)
 	private String name;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String url;
-	@Column(nullable = false)
+	@Column(nullable = false , length = 100)
 	private String logo;
 
 }

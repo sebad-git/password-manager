@@ -30,6 +30,8 @@ const handleSubmit = async (e: React.FormEvent) => {
   <div className="login">
       <Card>
         <div className="login-form">
+          <h4 >Login </h4>
+          <hr/>
           <form onSubmit={handleSubmit}>
             <div className="row">
               <div className="col-4">
@@ -61,11 +63,14 @@ const handleSubmit = async (e: React.FormEvent) => {
             </div>
             <div className="row login-form-spacer">
               <div className="col-12 text-center">
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
+                <button type="submit" className="btn btn-primary">Submit</button>
               </div>
             </div>
+              <br/><hr/>
+              <div className="row login-form-spacer text-center">
+                <div className="col-5"><button type="button" className="btn btn-primary">Signup</button></div>
+                <div className="col-7"><button type="button" className="btn btn-primary">Forgot Password</button></div>
+              </div>
           </form>
           {error && <div className="error-message">{error}</div>}
         </div>
